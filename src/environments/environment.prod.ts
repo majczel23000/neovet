@@ -1,11 +1,11 @@
 export const environment = {
   production: true,
   firebaseConfig: {
-    apiKey: "AIzaSyCJPWVxI_T0gI4_CN6ZSiXJ8Tw_2CCsh2g",
-    authDomain: "shopping-list-majczel.firebaseapp.com",
-    projectId: "shopping-list-majczel",
-    storageBucket: "shopping-list-majczel.appspot.com",
-    messagingSenderId: "1077776236174",
-    appId: "1:1077776236174:web:86a755aa961413b82893df"
+    apiKey: "AIzaSyD_ER4rOt3cGLslcW4pIERAIgIGIQ_BlqQ",
+    authDomain: "neovet-be41d.firebaseapp.com",
+    projectId: "neovet-be41d",
+    storageBucket: "neovet-be41d.appspot.com",
+    messagingSenderId: "16790937732",
+    appId: "1:16790937732:web:674ee6aebd8fe90f9ea2d1"
   }
 };
