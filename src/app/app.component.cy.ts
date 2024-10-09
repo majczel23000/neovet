@@ -30,7 +30,7 @@ describe('AppComponent', () => {
 
 
     it('Should have title', () => {
-        cy.get('h1').should('have.text', 'My Home Manager');
+        cy.get('h1').should('have.text', 'Neovet');
     });
 
     // it('should create AppComponent', () => {

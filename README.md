@@ -1,5 +1,5 @@
 
-# My Home Manager
+# Neovet
 
 The project was created to satisfy personal daily living needs at home. The functions are customized to ensure the user (myself) is fully satisfied.
 
