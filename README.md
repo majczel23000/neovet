@@ -15,9 +15,4 @@ The project was created to satisfy personal daily living needs at home. The func
   - Categorizing added products
   - Deselecting/removing added products.
 
-- Loans and debts
-  - Adding a new entry
-  - Adding a loan or debt to the entry
-  - Summing up liabilities
-  - Removing a loan or debt.
 - More coming soon (depends what i will need)

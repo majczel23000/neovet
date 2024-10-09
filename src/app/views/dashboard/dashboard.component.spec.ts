@@ -47,11 +47,4 @@ describe('DashboardComponent', () => {
     item.triggerEventHandler('click');
     expect(router.navigateByUrl).toHaveBeenCalledWith('/shopping');
   });
-
-  it('should navigate to loans list screen', () => {
-    spyOn(router, 'navigateByUrl');
-    const item = fixture.debugElement.queryAll(By.css('mat-card'))[1];
-    item.triggerEventHandler('click');
-    expect(router.navigateByUrl).toHaveBeenCalledWith('/loans');
-  });
 });
