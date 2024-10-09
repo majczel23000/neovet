@@ -1,0 +1,13 @@
+<app-header [sideNav]="sideNav"></app-header>
+
+<mat-sidenav-container fixedInViewport="true">
+  
+  <mat-sidenav #sideNav mode="over">
+    <app-navigation [sideNav]="sideNav"></app-navigation>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
