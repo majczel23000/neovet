@@ -1,0 +1,18 @@
+<app-current-location [location]="'Kategorie'"></app-current-location>
+
+<div class="categories-list">
+  @for (category of categories; track sectionIndex; let sectionIndex = $index) {
+      <div class="details-wrapper">
+        <span>{{ category.name }}</span>
+        <button mat-icon-button color="warn" (click)="removeItem(category.id!, category.name)">
+          <mat-icon class="material-icons">close</mat-icon>
+        </button>
+      </div>
+  }
+</div>
+
+<app-categories-add></app-categories-add>
+
+<div class="categories-info">Uwaga: Jeśli kategoria zostanie usunięta, wszystkie pozycje widoczne na liście zakupów przypisane do usuniętej kategorii, znikną z listy (do momentu ponownego stworzenia kategorii o tej samej nazwie).</div>
+
+

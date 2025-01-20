@@ -15,7 +15,7 @@ export const ROUTES: Routes = [
         loadComponent: () => import('./views/dashboard/dashboard.component').then(mod => mod.DashboardComponent),
     },
     {
-        path: 'shopping',
+        path: 'shopping/:id',
         canActivate: [AuthGuard],
         children: [
             {
@@ -23,6 +23,11 @@ export const ROUTES: Routes = [
                 loadComponent: () => import('./views/shopping/shopping-list/shopping-list.component').then(mod => mod.ShoppingListComponent),
             },
         ]
+    },
+    {
+      path: 'categories',
+      canActivate: [AuthGuard],
+      loadComponent: () => import('./views/categories/categories-list/categories-list.component').then(mod => mod.CategoriesListComponent),
     },
     {
         path: '**',

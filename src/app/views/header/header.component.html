@@ -3,13 +3,14 @@
     <button mat-icon-button (click)="sideNav?.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
-    <h1>NEOVET</h1>
-    <button [style.visibility]="backButtonVisibility ? 'visible' : 'hidden'" mat-raised-button (click)="goBack()">Wstecz</button>
+    <h1 (click)="navigateTo('/dashboard')">NEOVET</h1>
+    <button mat-icon-button [style.visibility]="backButtonVisibility ? 'visible' : 'hidden'"(click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
   </mat-toolbar>
 }
 @else {
   <mat-toolbar color="primary" [style.justify-content]="'center'">
-    <h1>NEOVET</h1>
+    <h1 (click)="navigateTo('/dashboard')">NEOVET</h1>
   </mat-toolbar>
 }
-

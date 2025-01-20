@@ -1,4 +1,6 @@
-<app-current-location [location]="'Lista zakupów'"></app-current-location>
+@if(shoppingListName) {
+  <app-current-location [location]="'Lista zakupów, miejsce: ' + shoppingListService.getLocalName(shoppingListName)"></app-current-location>
+}
 
 @if(!isLoading) {
   <div class="shopping-list-details">
@@ -59,7 +61,7 @@
 
     </mat-accordion>
 
-    <app-shopping-list-add [categories]="categories"></app-shopping-list-add>
+    <app-shopping-list-add [categories]="categories" [shoppingListName]="shoppingListName"></app-shopping-list-add>
 
   </div>
 }

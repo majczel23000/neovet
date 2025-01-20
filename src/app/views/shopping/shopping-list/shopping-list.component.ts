@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CategoryProductModel } from 'src/app/shared/models/shopping/category-products.model';
 import { CategoryModel } from 'src/app/shared/models/shopping/category.model';
@@ -49,8 +49,9 @@ import { ShoppingListAddComponent } from '../shopping-list-add/shopping-list-add
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {
 
-  protected shoppingListService = inject(ShoppingListService);
+  public shoppingListService = inject(ShoppingListService);
   protected router = inject(Router);
+  protected activatedRoute = inject(ActivatedRoute);
   protected subscriptions: Subscription[] = [];
   public isLoading = true;
   public shoppingList: ProductModel[] = [];
@@ -63,9 +64,15 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     category: '',
     isAdded: false
   }
+  public shoppingListName = '';
 
   ngOnInit(): void {
-    this.getCategories();
+    this.subscriptions.push(
+      this.activatedRoute.paramMap.subscribe(params => {
+        this.shoppingListName = params.get('id')!;
+        this.getCategories();
+      })
+    );
   }
 
   protected getCategories(): void {
@@ -81,7 +88,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   protected getShoppingListDetails(): void {
     this.subscriptions.push(
-      this.shoppingListService.getShoppingList().subscribe(
+      this.shoppingListService.getShoppingList(this.shoppingListName).subscribe(
         shoppingList => {
           this.shoppingList = shoppingList;
           this.createCategoriesWithProducts();
@@ -106,7 +113,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   public removeItem(event: any, id: string): void {
     event.preventDefault();
     event.stopPropagation();
-    this.shoppingListService.deleteProductFromShoppingList(id);
+    this.shoppingListService.deleteProductFromShoppingList(this.shoppingListName, id);
   }
 
   public saveEditedItem(event: any, sectionIndex: number, elementIndex: number, id: string): void {
@@ -117,14 +124,14 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     product.item = this.editElement.item;
     delete product.editMode;
     this.elementsAndCategories[sectionIndex].elements[elementIndex].editMode = false;
-    this.shoppingListService.updateProduct(product);
+    this.shoppingListService.updateProduct(this.shoppingListName, product);
   }
 
   public selectItem(id: string): void {
     const product = this.shoppingList.find(product => product.id === id)!;
     product.isAdded = !product.isAdded;
     delete product.editMode;
-    this.shoppingListService.updateProduct(product);
+    this.shoppingListService.updateProduct(this.shoppingListName, product);
   }
 
   public startClickEvent(): void {

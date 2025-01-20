@@ -10,10 +10,14 @@ import { CategoryModel } from '../../models/shopping/category.model';
 export class ShoppingListService {
 
   protected firestore = inject(AngularFirestore);
+  protected localName: { [key: string]: string } = {
+    'krakow': 'Kraków, Zygmunta Glogera 21',
+    'wegrzce': 'Węgrzce, os. Wojskowe 13',
+  };
 
   // Get shopping list details
-  getShoppingList(): Observable<ProductModel[]> {
-    return this.firestore.collection('shoppinglist').snapshotChanges().pipe(
+  getShoppingList(shoppingListName: string): Observable<ProductModel[]> {
+    return this.firestore.collection(shoppingListName).snapshotChanges().pipe(
       map(changes => {
         return changes.map(c => {
           return ({ ...(c.payload.doc.data() as ProductModel), id: c.payload.doc.id })
@@ -23,20 +27,32 @@ export class ShoppingListService {
   }
 
   // Update product in shopping list
-  updateProduct(product: ProductModel): Promise<void> {
-    return this.firestore.collection('shoppinglist').doc(product.id).set(product, { merge: true });
+  updateProduct(shoppingListName: string, product: ProductModel): Promise<void> {
+    return this.firestore.collection(shoppingListName).doc(product.id).set(product, { merge: true });
   }
 
   // Update product from shopping list
-  deleteProductFromShoppingList(id: string): Promise<void> {
-    return this.firestore.collection('shoppinglist').doc(id).delete();
+  deleteProductFromShoppingList(shoppingListName: string, id: string): Promise<void> {
+    return this.firestore.collection(shoppingListName).doc(id).delete();
   }
 
   // Create new product in shopping list
-  createNewProductInList(product: ProductModel): Promise<void | DocumentReference<unknown>> {
-    return this.firestore.collection('shoppinglist').add(product).then(ref => {
+  createNewProductInList(shoppingListName: string, product: ProductModel): Promise<void | DocumentReference<unknown>> {
+    return this.firestore.collection(shoppingListName).add(product).then(ref => {
       ref.set({ id: ref.id }, { merge: true });
     });
+  }
+
+  // Create new category
+  createNewCategory(category: string): Promise<void | DocumentReference<unknown>> {
+    return this.firestore.collection('categories').add({ name: category }).then(ref => {
+      ref.set({ id: ref.id }, { merge: true });
+    });
+  }
+
+  // Delete category
+  deleteCategory(id: string): Promise<void> {
+    return this.firestore.collection('categories').doc(id).delete();
   }
 
   // Get all categories (sorted)
@@ -47,5 +63,9 @@ export class ShoppingListService {
         .sort((a, b) => a.name.localeCompare(b.name))
       )
     );
+  }
+
+  getLocalName(shoppingListName: string): string {
+    return this.localName[shoppingListName];
   }
 }

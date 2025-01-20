@@ -1,0 +1,18 @@
+.categories-list {
+  .details-wrapper:first-of-type {
+    border-top: 1px solid #45818c;
+  }
+  .details-wrapper {
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #45818c;
+    padding: 0 10px 0 20px;
+  }
+}
+
+.categories-info {
+  margin: 10px;
+}

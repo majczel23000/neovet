@@ -1,16 +1,15 @@
 import { Component, inject, Input } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatOption } from '@angular/material/autocomplete';
 import { MatSelect } from '@angular/material/select';
-import { ProductModel } from '../../../shared/models/shopping/shopping-list.model';
 import { CategoryModel } from '../../../shared/models/shopping/category.model';
 import { ShoppingListService } from '../../../shared/services/shopping/shopping-list.service';
 
 @Component({
-  selector: 'app-shopping-list-add',
+  selector: 'app-categories-add',
   standalone: true,
   imports: [
     FormsModule,
@@ -19,35 +18,28 @@ import { ShoppingListService } from '../../../shared/services/shopping/shopping-
     MatInput,
     MatLabel,
     MatOption,
-    MatSelect,
-    ReactiveFormsModule
+    MatSelect
   ],
-  templateUrl: './shopping-list-add.component.html',
-  styleUrl: './shopping-list-add.component.scss'
+  templateUrl: './categories-add.component.html',
+  styleUrl: './categories-add.component.scss'
 })
-export class ShoppingListAddComponent {
+export class CategoriesAddComponent {
   @Input() categories: CategoryModel[] = [];
-  @Input() shoppingListName: string = '';
 
   protected shoppingListService = inject(ShoppingListService);
 
-  public addedProduct: ProductModel = {
-    item: '',
-    quantity: '',
-    category: '',
-    isAdded: false
-  }
+  public category: string = '';
 
-  public addNewProduct(): void {
+  public addNewCategory(): void {
     if (this.isAddButtonDisabled()) {
       return;
     }
-    this.shoppingListService.createNewProductInList(this.shoppingListName, this.addedProduct).then(() => {
-      this.addedProduct = { item: '', quantity: '', category: '', isAdded: false }
+    this.shoppingListService.createNewCategory(this.category).then(() => {
+      this.category = '';
     });
   }
 
   public isAddButtonDisabled(): boolean {
-    return !this.addedProduct.item.length || !this.addedProduct.quantity.length || !this.addedProduct.category.length;
+    return !this.category.length;
   }
 }

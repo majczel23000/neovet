@@ -43,4 +43,9 @@ export class HeaderComponent implements OnInit {
     window.history.back();
   }
 
+  public navigateTo(page: string): void {
+    this.router.navigateByUrl(page);
+    this.sideNav?.close();
+  }
+
 }

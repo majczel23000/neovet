@@ -1,11 +1,25 @@
 <section class="home-dashboard main-padding-20">
     <div>
-        <mat-card (click)="goTo('/shopping')">
-            <mat-card-content>
-                <mat-icon>add_shopping_cart</mat-icon>
-                <p>Lista zakupów</p>
-            </mat-card-content>
-        </mat-card>
-
+      <mat-card (click)="goTo('/shopping/wegrzce')">
+        <mat-card-content>
+          <h2>WĘGRZCE</h2>
+          <p>os. Wojskowe 13</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div>
+      <mat-card (click)="goTo('/shopping/krakow')">
+        <mat-card-content>
+          <h2>KRAKÓW</h2>
+          <p>Zygmunta Glogera 21</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div>
+      <mat-card (click)="goTo('/categories')">
+        <mat-card-content>
+          <h2>KATEGORIE</h2>
+        </mat-card-content>
+      </mat-card>
     </div>
 </section>

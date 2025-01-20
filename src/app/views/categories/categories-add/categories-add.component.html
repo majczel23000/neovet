@@ -1,0 +1,14 @@
+<form class="add-category main-padding-20">
+  <mat-form-field>
+    <mat-label>Kategoria</mat-label>
+    <input matInput placeholder="Kategoria" [(ngModel)]="category" name="category" autocomplete="off">
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="addNewCategory()"
+    [disabled]="isAddButtonDisabled()">
+    Dodaj nową kategorię
+  </button>
+</form>
